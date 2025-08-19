@@ -27,7 +27,7 @@ export class Flashcard extends Card {
 			mediaNames,
 			containsCode
 		);
-		this.modelName = this.reversed ? `Basic` : `Basic and Reversed`;
+		this.modelName = this.reversed ? `Basic and Reversed` : `Basic`;
 	}
 
 	public getCard(update = false): object {
