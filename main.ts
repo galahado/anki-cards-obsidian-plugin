@@ -147,7 +147,7 @@ export default class MyPlugin extends Plugin {
 			let answer = match[2].trim().replace(/\n/g, "<br/>");
 			const inserted = false;
 			const reversed = true;
-			const tags = [deck.concat("::").concat(note)];
+			const tags = [deck.concat("::").concat(note).replace(/\s/g, "_")];
 			const fields: any = {
 				Front: question,
 				Back: answer,
@@ -191,7 +191,7 @@ export default class MyPlugin extends Plugin {
 			let answer = match[2].trim();
 			const inserted = false;
 			const reversed = false;
-			const tags = [deck.concat("::").concat(note)];
+			const tags = [deck.concat("::").concat(note).replace(/\s/g, "_")];
 			const fields: any = {
 				Front: question,
 				Back: answer,
