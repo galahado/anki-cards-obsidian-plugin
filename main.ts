@@ -25,8 +25,8 @@ export default class MyPlugin extends Plugin {
 	async onload() {
 		// This adds a simple command that can be triggered anywhere
 		this.addCommand({
-			id: "open-sample-modal-simple",
-			name: "Open sample modal (simple)",
+			id: "anki-sync-mine",
+			name: "anki generate",
 			callback: () => {
 				this.generate();
 			},
@@ -196,7 +196,7 @@ export default class MyPlugin extends Plugin {
 			const fields: any = {
 				Front: question,
 				Back: answer,
-				Context: note,
+				Context: noteLink,
 			};
 			const containsCode = false;
 
