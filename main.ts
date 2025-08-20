@@ -62,7 +62,6 @@ export default class MyPlugin extends Plugin {
 			);
 
 			this.insertCardsOnAnki(cards, deckName);
-
 		}
 	}
 
@@ -278,40 +277,23 @@ export default class MyPlugin extends Plugin {
 		cardsToCreate: Card[],
 		deckName: string
 	): Promise<number> {
-		let insertedCards = 0;
 		if (cardsToCreate.length) {
 			try {
-				await this.addCards(cardsToCreate);
+				let cards = await this.addCards(cardsToCreate);
 
-				let total = 0;
-
-				cardsToCreate.forEach((card) => {
-					if (card.id === null) {
-						new Notice(
-							`Error, could not add: '${card.initialContent}'`,
-							5 * 1000
-						);
-					} else {
-						card.reversed ? (insertedCards += 2) : insertedCards++;
-					}
-					card.reversed ? (total += 2) : total++;
-				});
-
-				notifications.push(
-					`Inserted successfully ${insertedCards}/${total} cards.`
+				new Notice(
+					`Processed successfully ${cards.length} notes.`
 				);
 			} catch (err) {
 				console.error(err);
 				Error("Error: Could not write cards on Anki");
 			}
 		}
-		return insertedCards;
+		return cardsToCreate.length;
 	}
 
 	public async addCards(cards: Card[]): Promise<number[]> {
 		const ids: any = [];
-
-		console.log("cards: ", cards)
 
 		cards.forEach((card) => {
 			const id = this.invoke("addNote", 6, { note: card });
